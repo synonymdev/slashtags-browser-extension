@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "slashtags-extension",
+    "description": ""
+  },
+  "extVersion": {
+    "message": "0.2",
+    "description": ""
+  },
+  "accountsNone": {
+    "message": "You don't have any accounts yet",
+    "description": ""
+  }
+}
