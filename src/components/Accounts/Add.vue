@@ -1,23 +1,53 @@
 <template>
-  <div class="card">
-    <h1>Login Request</h1>
-    <p>Do you wabnt to login to:</p>
-    <div class="row">
-      <div class="column">
-      <img :src="account.payload.image">
-      </div>
-      <div class="column">
-        Tag: {{account.payload.title}}
+<v-card
+    class="mx-auto"
+    max-width="344"
+    outlined
+  >
+    <v-list-item three-line>
+      <v-list-item-content>
+        <div class="text-overline mb-4">
+          Login
+        </div>
+        <v-list-item-title class="text-h5 mb-1">
+          {{account.payload.title}}
+        </v-list-item-title>
+        <v-list-item-subtitle>{{account.payload.pubKey}}</v-list-item-subtitle>
+      </v-list-item-content>
 
-        {{account.payload}}
-      </div>
-    </div>
-    <div class="footer">
-      <button v-on:click="signIn">sign</button>
-    <button v-on:click="addAccount(account.payload);">Allow</button>
-    <button v-on:click="closeWindow">Cancel</button>
-    </div>
-  </div>
+      <v-list-item-avatar
+        tile
+        size="80"
+        color="grey"
+      >
+      <img :src="account.payload.image">
+      </v-list-item-avatar>
+    </v-list-item>
+
+    <v-card-actions>
+      <v-btn v-on:click="closeWindow"
+        outlined
+        rounded
+        text
+      >
+        Cancel
+      </v-btn>
+      <v-btn v-on:click="addAccount(account.payload)"
+        outlined
+        rounded
+        text
+      >
+        Add
+      </v-btn>
+      <v-btn v-on:click="signIn"
+        outlined
+        rounded
+        text
+      >
+        Login
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
@@ -44,7 +74,7 @@ export default {
       var reqPayload = parse(atob(this.$route.params.tag));
       var username = "John Carvalho"
       var userKeyPair = curve.generateSeedKeyPair(username);
-      console.log("uaer", userKeyPair);
+      
       const { initiator } = createAuth(userKeyPair, {
         metadata: {
           name: username,
@@ -88,39 +118,6 @@ export default {
 </script>
 
 <style scoped>
-
-.card {
-
-}
-.column {
-  float: left;
-}
-
-.left {
-  width: 25%;
-}
-
-.right {
-  width: 75%;
-}
-
-.row img {
-  width:40px;
-}
-.row {
-  background:#2b2b2b;
-  
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.footer {
-  clear:both;
-}
 
 p {
   opacity: 0.4;

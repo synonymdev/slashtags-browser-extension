@@ -4,7 +4,7 @@ document.body.addEventListener('click', async (e) => {
     switch (element.tagName) {
         case "PRE":
             var href = element.innerText
-            if (href) {
+            if (href && /^slashtags/.test(href)) {
                 chrome.runtime.sendMessage({uri: href}, function(response) {
                     console.log("Response: ", response);
                     console.log("Response: ", response.payload.title, response.payload.image);

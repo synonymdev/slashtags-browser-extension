@@ -14,8 +14,8 @@ chrome.contextMenus.create({
     chrome.windows.create({
       url: "popup.html#/account/add/" + btoa(info.selectionText),
       type: "popup",
-      width: 320,
-      height:500
+      width: 400,
+      height:340
     } , () => {
 
     })
@@ -28,8 +28,8 @@ chrome.runtime.onMessage.addListener(function(request, send, sendResponse) {
     chrome.windows.create({
       url: "popup.html#/account/add/" + btoa(request.uri),
       type: "popup",
-      width: 320,
-      height:500
+      width: 400,
+      height:340
     } , () => {
 
     })

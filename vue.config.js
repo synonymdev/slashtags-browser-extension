@@ -1,5 +1,6 @@
 module.exports = {
-	runtimeCompiler: true,
+  runtimeCompiler: true,
+
   pages: {
     popup: {
       template: 'public/browser-extension.html',
@@ -28,6 +29,7 @@ module.exports = {
       title: 'Devtools'
     }
   },
+
   pluginOptions: {
     browserExtension: {
       componentOptions: {
@@ -43,5 +45,9 @@ module.exports = {
         }
       }
     }
-  }
+  },
+
+  transpileDependencies: [
+    'vuetify'
+  ]
 }
