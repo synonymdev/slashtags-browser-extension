@@ -46,7 +46,19 @@ module.exports = {
       }
     }
   },
-
+  configureWebpack: {
+    module: {
+      rules: [
+        { 
+          test: /act_1\.js$/,
+          loader: "babel-loader"
+        }, {  
+          test: /index\.js$/,
+          loader: "babel-loader"
+        },   
+      ] 
+    }
+  },
   transpileDependencies: [
     'vuetify'
   ]

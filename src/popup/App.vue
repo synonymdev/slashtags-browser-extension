@@ -2,37 +2,37 @@
   <div>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
     <v-app>
-      <v-navigation-drawer app>
-      </v-navigation-drawer>
+      <v-app-bar app v-if="showMenu" color="transparent"  class="elevation-0">
+        <v-spacer></v-spacer>
+        <v-toolbar-title>Accounts</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-menu
+          bottom
+          left
+            class="elevation-0"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              dark
+              icon
+              v-bind="attrs"
+              v-on="on"
+            >
+              <v-icon>mdi-menu</v-icon>
+            </v-btn>
+          </template>
 
-      <v-app-bar app v-show="showMenu">
-                <span class="text-h5">Slashtags</span>
-
-                <v-spacer></v-spacer>
-
-                <v-menu
-                  bottom
-                  left
-                >
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      dark
-                      icon
-                      v-bind="attrs"
-                      v-on="on"
-                    >
-                      <v-icon>mdi-dots-vertical</v-icon>
-                    </v-btn>
-                  </template>
-
-                  <v-list>
-                    <v-list-item>
-                      <v-list-item-title>Settings</v-list-item-title>
-                    </v-list-item>
-                  </v-list>
-                </v-menu>
-
+          <v-list>
+            <v-list-item>
+              <v-list-item-title @click="$router.push({path:'/settings'})">Settings</v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title @click="lock">Lock</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
       </v-app-bar>
       
       <v-main>
@@ -41,21 +41,28 @@
         </v-container>
       </v-main>
 
-      <v-footer app dark>
-        
-      </v-footer>
+
     </v-app>
-    
   </div>
 </template>
 
 <script>
-
+import { mapActions } from 'vuex'
 export default {
   name: 'App',
+  methods: {
+    ...mapActions([
+        'lockWallet',
+        'unlockWallet'
+    ]),
+    lock () {      
+      this.lockWallet()
+      this.$router.push({path:'/login'})
+    }
+  },
   computed: {
     showMenu : function() {
-      return !/^\/account\/add/.test(this.$route.path)
+      return this.$route.meta.header
     }
   }
 }
@@ -63,12 +70,16 @@ export default {
 
 <style>
 html {
-  width: 400px;
-  height: 400px;
+  min-width: 375px;
+  min-height: 600px;
 }
 
+#app {
+  background: #151718 url(/bg.svg);
+  background-size: cover;
+}
 body {
-  background: #151718;
   color:#fff;
 }
+
 </style>

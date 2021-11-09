@@ -4,7 +4,7 @@ document.body.addEventListener('click', async (e) => {
     switch (element.tagName) {
         case "PRE":
             var href = element.innerText
-            if (href && /^slashtags/.test(href)) {
+            if (href && /^slash/.test(href)) {
                 chrome.runtime.sendMessage({uri: href}, function(response) {
                     console.log("Response: ", response);
                     console.log("Response: ", response.payload.title, response.payload.image);
@@ -13,7 +13,7 @@ document.body.addEventListener('click', async (e) => {
             break;
         default:
             if (!element || !element.closest) return
-                var uri = element.closest('[href^="slashtags:"]')
+                var uri = element.closest('[href^="slash:"]')
                 if (uri) {
                     e.preventDefault() // prevent invoking protocol handler 
                     const href = uri.getAttribute('href')
