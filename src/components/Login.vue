@@ -11,7 +11,7 @@
         </v-card>
         <v-card class="transparent elevation-0">
           <v-card-title>
-            Login
+            Unlock Wallet
           </v-card-title>
           <v-card-text class="pt-4 transparent elevation-0">
             <div>
@@ -30,7 +30,7 @@
                     required
                   ></v-text-field>
                   <v-layout justify-space-between>
-                    <v-btn @click="submit" :class=" { 'orange darken-4 white--text' : valid, disabled: !valid }">Login</v-btn>
+                    <v-btn @click="submit" :class=" { 'orange darken-4 white--text' : valid, disabled: !valid }">Unlock</v-btn>
                   </v-layout>
                 </v-form>
             </div>
@@ -64,8 +64,6 @@
           ]),
           async submit () {
             if (this.$refs.form.validate()) {
-              var _ = this;
-              console.log(this.password, this.$store.state.encryptedAccounts[0])
               var resp = await this.decodeAccount({data:this.$store.state.encryptedAccounts[0],password:this.password})
               if (resp) {
                 console.log("success")
@@ -74,20 +72,7 @@
               } else {
                 console.log("fail",resp)
                 this.error = resp
-              }
-              //this.decodeAccount({})
-              /*
-              this.createAccount({password: this.password}).then((data) => {
-                var payload = {}
-                payload.password = _.password
-                payload.data = data
-                console.log("here data", data)
-                
-                //_.decodeAccount(payload).then(console.log)
-                this.$router.push({path:'account/list'})
-              })
-              */
-              
+              }              
             }
           },
           clear () {

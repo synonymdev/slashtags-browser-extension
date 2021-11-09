@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import VuexPersistence from 'vuex-persist'
 import { encrypt, decrypt } from '../utils/crypto'
-import { Keychain} from 'keychainjs'
+import { Keychain } from '../utils/keychain'
 
 const vuexLocal = new VuexPersistence({
     storage: window.localStorage

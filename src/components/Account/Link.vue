@@ -29,7 +29,7 @@
 
 <script>
 import { Core } from '@synonymdev/slashtags-core';
-import { Keychain } from 'keychainjs';
+import { Keychain } from '../../utils/keychain'
 import { SlashtagsActions } from '@synonymdev/slashtags-actions';
 import { mapActions } from 'vuex'
 
