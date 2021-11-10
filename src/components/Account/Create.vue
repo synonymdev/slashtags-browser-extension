@@ -12,16 +12,6 @@
             <div>
                 <v-form v-model="valid" ref="form">
                   <v-text-field
-                    label="Enter account name"
-                    color="rgba(255, 92, 0, 1)"
-                    v-model="username"
-                    min="8"
-                    :type="text"
-                    counter
-                    required
-                  ></v-text-field>
-
-                  <v-text-field
                     label="Enter your password"
                     v-model="password"
                     color="rgba(255, 92, 0, 1)"
@@ -71,7 +61,6 @@
           return {
             valid: false,
             e1: true,
-            username: '',
             password: '',
             password_confirm: '',
             passwordRules: [
@@ -90,11 +79,10 @@
           submit () {
             if (this.$refs.form.validate()) {
               var _ = this;
-              this.createAccount({username: this.username, password: this.password}).then((data) => {
+              this.createAccount({ password: this.password }).then((data) => {
                 var payload = {}
                 payload.password = _.password
                 payload.data = data
-                console.log("hre",payload)
                 this.$router.push({path: '/account/list'})
               })
               

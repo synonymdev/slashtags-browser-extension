@@ -16,6 +16,7 @@ const store = new Vuex.Store({
       encryptedAccounts: [],
       accounts: [],
       count: 0,
+      network: 'bitcoin',
       locked: false
     },
     mutations: {
@@ -49,7 +50,6 @@ const store = new Vuex.Store({
     },
     actions: {
       addLogin (context, payload) {
-        console.log("Logibn", payload)
         context.commit({
           "type": "addLogin",
           data: payload,
@@ -59,12 +59,12 @@ const store = new Vuex.Store({
       async createAccount (context, payload) {
         var kc = false
           if (payload.mnemonic) { // new account
-            kc = new Keychain({mnemonic: payload.mnemonic, network:'bitcoin'})
+            kc = new Keychain({mnemonic: payload.mnemonic, network:this.network})
           } else { // existing account
-            kc = new Keychain({network:'bitcoin'})
+            kc = new Keychain({network:this.network})
           }
           const account = {
-            name: payload.username,
+            name: (payload.username) ? payload.username : 'Anonymous',
             mnemonic: kc._mnemonic,
             logins: []
           }
