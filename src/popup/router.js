@@ -4,18 +4,26 @@ import store from './store.js'
 
 Vue.use(VueRouter);
 
+import Home from '@/components/Home.vue'
+import Login from '@/components/Login.vue'
+
+import Onboarding from '@/components/Onboarding.vue'
+import Onboarding_Terms from '@/components/Onboarding/Terms.vue'
+import Onboarding_Create from '@/components/Onboarding/Create.vue'
+import Onboarding_Confirm from '@/components/Onboarding/Confirm.vue'
+
 import Account from '@/components/Account/Index.vue'
 import Account_Create from '@/components/Account/Create.vue'
 import Account_View from '@/components/Account/View.vue'
 import Account_Link from '@/components/Account/Link.vue'
 import Account_Import from '@/components/Account/Import.vue'
 import Account_List from '@/components/Account/List.vue'
-import Home from '@/components/Home.vue'
-import Login from '@/components/Login.vue'
-import Onboarding from '@/components/Onboarding.vue'
-import Onboarding_Terms from '@/components/Onboarding/Terms.vue'
-import Onboarding_Create from '@/components/Onboarding/Create.vue'
-import Onboarding_Confirm from '@/components/Onboarding/Confirm.vue'
+
+import Profile from '@/components/Profile/Index.vue'
+import Profile_List from '@/components/Profile/List.vue'
+import Profile_View from '@/components/Profile/View.vue'
+import Profile_Add from '@/components/Profile/Add.vue'
+
 import Settings from '@/components/Settings.vue'
 
 const routes = [
@@ -95,7 +103,8 @@ const routes = [
         component: Account_List,
         meta: { 
           header: true,
-          requiresAuth: true
+          requiresAuth: true,
+          profile: true
         }
       },{
         name: 'link',
@@ -103,6 +112,41 @@ const routes = [
         component: Account_Link,
         meta: { 
           header: true,
+          requiresAuth: false
+        }
+      }]
+    },{ 
+      name: 'profile',
+      path: '/profile',
+      component: Profile,
+      meta: {
+        requiresAuth: true
+      },
+      children: [{
+        name: 'list',
+        path: 'list',
+        component: Profile_List,
+        meta: { 
+          header: true,
+          back: true,
+          requiresAuth: true
+        }
+      },{
+        name: 'view',
+        path: 'view/:id',
+        component: Profile_View,
+        meta: { 
+          header: true,
+          back: true,
+          requiresAuth: false
+        }
+      },{
+        name: 'add',
+        path: 'add',
+        component: Profile_Add,
+        meta: { 
+          header: true,
+          back: true,
           requiresAuth: false
         }
       }]

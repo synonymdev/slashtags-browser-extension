@@ -4,7 +4,7 @@
       <v-flex xs12 sm4 elevation-0>
         <v-toolbar class="pt-5 transparent elevation-0">
           <v-toolbar-items>
-              <v-toolbar-title class="white--text"><h4>Create new Account</h4></v-toolbar-title>
+              <v-toolbar-title class="white--text"><h4>Secure your data</h4></v-toolbar-title>
           </v-toolbar-items>
         </v-toolbar>
         <v-card class="transparent elevation-0">

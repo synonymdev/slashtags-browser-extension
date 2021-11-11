@@ -4,15 +4,32 @@
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
     <v-app>
+      
       <v-app-bar app v-if="showMenu" color="transparent"  class="elevation-0">
+         <v-btn
+              dark
+              icon
+              @click="$router.go(-1)"
+              v-show="showBack"
+            >
+            <v-icon>mdi-arrow-left</v-icon>
+        </v-btn>
+        <v-btn
+          dark
+          icon
+           v-show="showProfile"
+          @click="$router.push({path:'/profile/list'})"
+        >
+          <v-icon>mdi-account</v-icon>
+        </v-btn>
         <v-spacer></v-spacer>
         <v-toolbar-title>Accounts</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-menu
           bottom
           left
-            class="elevation-0"
-        >
+          class="elevation-0"
+          origin="center center" transition="scale-transition">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               dark
@@ -41,7 +58,6 @@
         </v-container>
       </v-main>
 
-
     </v-app>
   </div>
 </template>
@@ -50,6 +66,11 @@
 import { mapActions } from 'vuex'
 export default {
   name: 'App',
+  data() {
+    return {
+      on : {}
+    }
+  },
   methods: {
     ...mapActions([
         'lockWallet',
@@ -61,8 +82,14 @@ export default {
     }
   },
   computed: {
-    showMenu : function() {
+    showMenu () {
       return this.$route.meta.header
+    },
+    showBack() {
+      return this.$route.meta.back
+    },
+    showProfile() {
+      return this.$route.meta.profile
     }
   }
 }

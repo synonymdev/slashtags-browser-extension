@@ -1,6 +1,13 @@
 <template>
   <div>
-    <div v-if="!error">
+    <div style="text-align:center" v-show="!login.image && !error">
+     <v-progress-circular
+      :width="3"
+      color="white"
+      indeterminate
+    ></v-progress-circular>
+    </div>
+    <div v-if="!error" v-show="login.name">
       <v-list-item>
         <v-list-item-avatar>
           <v-img :src="login.image"></v-img>
@@ -14,16 +21,31 @@
       </v-list-item>
     </div> 
     <p v-else>{{error}}</p>
-      <v-bottom-sheet inset persistent v-model="sheet">
-        <v-card style="background:transparent">
-          <v-card-actions>
-              <v-btn v-on:click="closeWindow" large rounded text>Cancel</v-btn>
-              <v-spacer></v-spacer>
-              <v-btn v-on:click="signIn" :disabled="error" style="color: rgba(75, 196, 0, 1);" large rounded text>Accept</v-btn>
-          </v-card-actions>
-        </v-card>
-    </v-bottom-sheet>
-    
+    <v-select v-show="login.name"
+          v-model="profile"
+          color="rgba(255, 92, 0, 1)"
+          :items="profiles"
+          item-text="name"
+          item-value="index"
+          label="Select"
+          persistent-hint
+          return-object
+          single-line
+        >
+         <template v-slot:selection="{ item, index }">
+          <img :src="item.image" width="20px" style="border-radius:100%"> <v-spacer></v-spacer> {{ item.name }}
+        </template>
+        </v-select>
+
+    <v-bottom-navigation app>
+      <v-card style="background:transparent" elevation-0 class="elevation-0">
+        <v-card-actions>
+          <v-btn v-on:click="closeWindow" large rounded text>Cancel</v-btn>
+          <v-spacer></v-spacer>
+          <v-btn v-on:click="signIn" :disabled="error" style="color: rgba(75, 196, 0, 1);" large rounded text>Accept</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-bottom-navigation>
   </div>
 </template>
 
@@ -38,14 +60,19 @@ export default {
   props: ['tag'],
   data() {
     return {
-      sheet: true,
       theme : {
         isDark : true
       },
       loggedIn: false,
       login : {},
       keychain : false,
-      error: false
+      error: false,
+      profile: this.$store.state.accounts[0].profiles[0]
+    }
+  },
+  computed: {
+    profiles() {
+      return this.$store.state.accounts[0].profiles
     }
   },
   mounted () {
@@ -61,17 +88,17 @@ export default {
               console.log("Data",data)
               _.login = data.metadata
               _.login.publicKey = data.publicKey
-              var username = this.$store.state.accounts[0].name
 
               var metadata = {
-                name: username,
-                image: 'https://pbs.twimg.com/profile_images/1406681834021339137/xV9wQjx4_400x400.png',
+                name: this.profile.name,
+                image: this.profile.image,
                 publicKey: this.keychain.getPublicKey()
               };
-              console.log("Wiating here")
+              console.log("Loggin in with", metadata)
+              
               await _.isLoggedIn()
               this.addLogin(_.login)
-              console.log("Done waiting")
+
               return { metadata, keyPair: this.keychain.getKeypair()};
             },
             onSuccess: ({responderPK, metadata}) => {
@@ -99,10 +126,10 @@ export default {
     ...mapActions([
         'addLogin'
     ]),
-    closeWindow: function () {		
+    closeWindow () {		
 			window.close();	
     },
-    isLoggedIn : async function() {
+    async isLoggedIn() {
       var _ = this;
       await new Promise((resolve) => {
         
@@ -114,7 +141,7 @@ export default {
       });
       return !this.loggedIn
     },
-    signIn: async function() {
+    async signIn() {
       this.loggedIn =true
     }
   }
@@ -127,7 +154,6 @@ export default {
 }
 .v-list-item__subtitle {
   text-overflow: ellipsis;
-  width:200px;
 }
 
 .v-list-item {

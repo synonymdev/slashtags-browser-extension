@@ -20,14 +20,25 @@ const store = new Vuex.Store({
       locked: false
     },
     mutations: {
+      addProfile (state, payload) {
+        if (!state.accounts[0].profiles) {
+          state.accounts[0].profiles = []
+        }
+        state.accounts[0].profiles.push(payload.data)
+      },
       addLogin (state, payload) {
         if (!state.accounts[0].logins) {
           state.accounts[0].logins = []
         }
+        payload.data.active = true
         state.accounts[0].logins.push(payload.data)
       },
-      removeLogin (state) {
-        state.accounts[0].logins.pop()
+      removeProfile (state, payload) {
+        state.accounts[0].profiles.splice(payload.data, 1)
+      },
+      removeLogin (state, payload) {
+        state.accounts[0].logins.splice(payload.data, 1)
+        //state.accounts[0].logins[payload.data].active = false
       },
       addEncryptedAccount(state, payload) {
         state.encryptedAccounts.push(payload.data)
@@ -56,6 +67,13 @@ const store = new Vuex.Store({
           meta: false
         })
       },
+      addProfile (context, payload) {
+        context.commit({
+          "type": "addProfile",
+          data: payload,
+          meta: false
+        })
+      },
       async createAccount (context, payload) {
         var kc = false
           if (payload.mnemonic) { // new account
@@ -66,7 +84,11 @@ const store = new Vuex.Store({
           const account = {
             name: (payload.username) ? payload.username : 'Anonymous',
             mnemonic: kc._mnemonic,
-            logins: []
+            logins: [],
+            profiles: [{
+              name: 'Anonymous',
+              image: 'https://pbs.twimg.com/profile_images/1406681834021339137/xV9wQjx4_400x400.png'
+            }]
           }
 
           var encrypted = await encrypt(JSON.stringify(account), payload.password)
@@ -104,9 +126,20 @@ const store = new Vuex.Store({
       removeAccount (context) {
           context.commit("removeAccount")
       },
-      removeLogin (context) {
-        context.commit("removeLogin")
-      }  
+      removeLogin (context, index) {
+        context.commit({
+          "type": "removeLogin",
+          data: index,
+          meta: false
+        })
+      },
+      removeProfile (context, index) {
+        context.commit({
+          "type": "removeProfile",
+          data: index,
+          meta: false
+        })
+      } 
     },
     getters: {
         accountCount: state => {

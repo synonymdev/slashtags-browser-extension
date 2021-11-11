@@ -46,6 +46,13 @@ module.exports = {
       }
     }
   },
+  css: {
+    loaderOptions: {
+      scss: {
+        prependData: "@import '@/src/styles/variables.scs';"
+      }
+    }
+  },
   configureWebpack: {
     module: {
       rules: [
@@ -55,7 +62,23 @@ module.exports = {
         }, {  
           test: /index\.js$/,
           loader: "babel-loader"
-        },   
+        },{
+          test: /\.scss$/,
+          use: [
+            'vue-style-loader',
+            'css-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                additionalData: "@import '@/styles/variables.scs';",
+                implementation: require('sass'),
+                sassOptions: {
+                  indentedSyntax: true
+                },
+              }
+            }
+          ]
+        }
       ] 
     }
   },

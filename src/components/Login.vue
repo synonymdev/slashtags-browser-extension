@@ -26,7 +26,6 @@
                     :type="e1 ? 'password' : 'text'"
                     :rules="passwordRules"
                     @click:append="e1 = !e1"
-                    counter
                     required
                   ></v-text-field>
                   <v-layout justify-space-between>

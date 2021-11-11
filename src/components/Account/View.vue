@@ -49,11 +49,10 @@
         <p class="content">{{account.name}}</p>
         <p class="header">Public Key</p>
         <p class="content">{{account.logins[this.$route.params.id].publicKey}}</p>
-          
       </v-container>
     
     <v-bottom-navigation v-model="sheet">
-        <v-btn v-on:click="removeLogin" large rounded text>Delete</v-btn>
+        <v-btn v-on:click="deactiveLogin($route.params.id)" large rounded text>Delete</v-btn>
     </v-bottom-navigation>
     
   </div>
@@ -67,7 +66,11 @@ export default {
   methods: {
     ...mapActions([
         'removeLogin'
-    ])
+    ]),
+    deactiveLogin(id) {
+      this.removeLogin(id)
+      this.$router.push({path: "/account/list"})
+    }
   },
   data () {
     return {

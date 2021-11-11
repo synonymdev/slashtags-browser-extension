@@ -20,6 +20,7 @@
     "bitcoinjs-lib": "^5.2.0",
     "core-js": "^3.6.5",
     "crypto-js": "^4.1.1",
+    "deepmerge": "^4.2.2",
     "lru": "^3.1.0",
     "pbkdf2": "^3.1.2",
     "vue": "^2.6.11",
