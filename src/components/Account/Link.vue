@@ -26,13 +26,13 @@
           color="rgba(255, 92, 0, 1)"
           :items="profiles"
           item-text="name"
-          item-value="index"
+          item-value="name"
           label="Select"
           persistent-hint
           return-object
           single-line
         >
-         <template v-slot:selection="{ item, index }">
+         <template v-slot:selection="{ item }">
           <img :src="item.image" width="20px" style="border-radius:100%"> <v-spacer></v-spacer> {{ item.name }}
         </template>
         </v-select>
