@@ -19,7 +19,7 @@
         </v-list-item>
       </template>
     </div>
-    <p v-else>There are no accounts logged in right now</p>
+    <p v-else style="padding:80px;padding-top:200px;text-align:center;">There are no accounts logged in right now</p>
     </div>
 
 </template>
