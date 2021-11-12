@@ -4,7 +4,6 @@
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
     <v-app>
-      
       <v-app-bar app v-if="showMenu" color="transparent"  class="elevation-0">
          <v-btn
               dark
@@ -23,7 +22,7 @@
           <v-icon>mdi-account</v-icon>
         </v-btn>
         <v-spacer></v-spacer>
-        <v-toolbar-title>Accounts</v-toolbar-title>
+        <v-toolbar-title>{{title}}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-menu
           bottom
@@ -68,7 +67,8 @@ export default {
   name: 'App',
   data() {
     return {
-      on : {}
+      on : {},
+      title: (this.$route.meta.title) ? this.$route.meta.title : "Accounts"
     }
   },
   methods: {
@@ -96,6 +96,7 @@ export default {
 </script>
 
 <style>
+
 html {
   min-width: 375px;
   min-height: 600px;

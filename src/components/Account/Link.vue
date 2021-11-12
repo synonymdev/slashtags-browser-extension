@@ -1,4 +1,5 @@
 <template>
+
   <div>
     <div style="text-align:center" v-show="!login.image && !error">
      <v-progress-circular
@@ -37,14 +38,10 @@
         </template>
         </v-select>
 
-    <v-bottom-navigation app>
-      <v-card style="background:transparent" elevation-0 class="elevation-0">
-        <v-card-actions>
+    <v-bottom-navigation app grow class="transparent">
           <v-btn v-on:click="closeWindow" large rounded text>Cancel</v-btn>
           <v-spacer></v-spacer>
-          <v-btn v-on:click="signIn" :disabled="error" style="color: rgba(75, 196, 0, 1);" large rounded text>Accept</v-btn>
-        </v-card-actions>
-      </v-card>
+          <v-btn v-on:click="signIn" :disabled="error" style="color: rgba(75, 196, 0, 1) !important;" large rounded text>Accept</v-btn>
     </v-bottom-navigation>
   </div>
 </template>
@@ -63,6 +60,7 @@ export default {
       theme : {
         isDark : true
       },
+      title:"Connect",
       loggedIn: false,
       login : {},
       keychain : false,
@@ -149,25 +147,28 @@ export default {
 </script>
 
 <style scoped>
-.v-card-actions,.v-card, .v-bottom-sheet {
-  background:transparent;
-}
+
 .v-list-item__subtitle {
   text-overflow: ellipsis;
 }
-
-.v-list-item {
-  background:rgba(255, 255, 255, 0.07);
-  border-radius: 10px;
+.v-bottom-navigation {
+  margin-bottom:20px;
 }
-
-.v-btn {
+.v-bottom-navigation .v-btn {
+  background:rgba(255, 255, 255, 0.07) !important;
+  border-radius: 40px !important;
   padding:10px;
-  background:rgba(255, 255, 255, 0.07);
+  margin:10px;
 }
 
 p {
   opacity: 0.4;
   font-size: 17px;
+}
+</style>
+
+<style>
+body,html {
+  overflow:hidden;
 }
 </style>

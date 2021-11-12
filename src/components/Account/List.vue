@@ -66,6 +66,7 @@ export default {
 </script>
 
 <style scoped>
+
 .v-list-item__subtitle {
   text-overflow: ellipsis;
   width:200px;

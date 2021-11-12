@@ -112,7 +112,8 @@ const routes = [
         component: Account_Link,
         meta: { 
           header: true,
-          requiresAuth: false
+          requiresAuth: false,
+          title : "Connect"
         }
       }]
     },{ 
