@@ -1,7 +1,7 @@
 <template>
-  <v-container fluid fill-height class="loginOverlay">
+  <v-container fluid fill-height>
     <v-layout flex align-center justify-center>
-      <v-flex xs12 sm4 elevation-0>
+      <v-flex xs12 sm4 elevation-0 class="fadeIn">
         <v-toolbar class="pt-5 transparent elevation-0">
           <v-toolbar-items>
               <v-toolbar-title class="white--text"><h4>Secure your data</h4></v-toolbar-title>
@@ -94,3 +94,19 @@
         }
   }
 </script>
+
+<style scoped>
+.fade-in {
+  animation: fadeIn 2s;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+</style>
