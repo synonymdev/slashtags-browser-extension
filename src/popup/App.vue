@@ -102,8 +102,8 @@ html {
 }
 
 #app {
-  background: #151718 url(/bg.svg);
-  background-size: cover;
+  background: #151718 url(/bg.svg) no-repeat;
+  
 }
 body {
   color:#fff;
