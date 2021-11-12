@@ -27,9 +27,11 @@
       </template>
     </div>
     <p v-else>There are no accounts logged in right now</p>
-    <v-btn @click="$router.push({path:'/profile/add'})">
-      Add
-    </v-btn>
+    <v-bottom-navigation app grow class="transparent">
+      <v-btn @click="$router.push({path:'/profile/add'})">
+        Add
+      </v-btn>
+    </v-bottom-navigation>
     </div>
 </template>
 
@@ -61,11 +63,15 @@ export default {
 <style scoped>
 .v-list-item__subtitle {
   text-overflow: ellipsis;
-  width:200px;
 }
-
-.v-list-item {
-  background:rgba(255, 255, 255, 0.07);border-radius: 10px;
+.v-bottom-navigation {
+  margin-bottom:20px;
+}
+.v-bottom-navigation .v-btn {
+  background:rgba(255, 255, 255, 0.07) !important;
+  border-radius: 40px !important;
+  padding:10px;
+  margin:10px;
 }
 
 p {

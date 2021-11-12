@@ -9,8 +9,8 @@
         <p class="content">{{account.profiles[this.$route.params.id].name}}</p>
       </v-container>
     
-    <v-bottom-navigation v-model="sheet">
-        <v-btn v-on:click="deactiveProfile($route.params.id)" large rounded text>Delete</v-btn>
+    <v-bottom-navigation app grow class="transparent">
+      <v-btn v-on:click="deactiveProfile($route.params.id)" large rounded text>Delete</v-btn>
     </v-bottom-navigation>
     
   </div>
@@ -45,6 +45,18 @@ export default {
 </script>
 
 <style scoped>
+.v-list-item__subtitle {
+  text-overflow: ellipsis;
+}
+.v-bottom-navigation {
+  margin-bottom:20px;
+}
+.v-bottom-navigation .v-btn {
+  background:rgba(255, 255, 255, 0.07) !important;
+  border-radius: 40px !important;
+  padding:10px;
+  margin:10px;
+}
 
 p.header {
 color: rgba(247, 92, 26, 1);;font-weight:bold;font-size:13px;margin:0px
