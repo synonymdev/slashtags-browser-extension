@@ -32,7 +32,7 @@
           persistent-hint
           return-object
           single-line
-        >
+          >
          <template v-slot:selection="{ item }">
           <img :src="item.image" width="20px" style="border-radius:100%"> <v-spacer></v-spacer> {{ item.name }}
         </template>
@@ -87,14 +87,13 @@ export default {
               _.login = data.metadata
               _.login.publicKey = data.publicKey
 
+              await _.isLoggedIn()
+
               var metadata = {
                 name: this.profile.name,
                 image: this.profile.image,
                 publicKey: this.keychain.getPublicKey()
               };
-              console.log("Loggin in with", metadata)
-              
-              await _.isLoggedIn()
               this.addLogin(_.login)
 
               return { metadata, keyPair: this.keychain.getKeypair()};
