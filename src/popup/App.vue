@@ -96,6 +96,10 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: NHaasGrotes;
+  src: url(/NHaasGroteskTXPro-55Rg.ttf);
+}
 
 html {
   min-width: 375px;
@@ -104,7 +108,7 @@ html {
 
 #app {
   background: #151718 url(/bg.svg) no-repeat;
-  
+  font-family: NHaasGrotes !important;
 }
 body {
   color:#fff;
