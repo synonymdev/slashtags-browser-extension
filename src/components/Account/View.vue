@@ -46,7 +46,7 @@
         <p class="header">Account Name</p>
         <p class="content">{{account.logins[this.$route.params.id].name}}</p>
         <p class="header">Username</p>
-        <p class="content">{{account.name}}</p>
+        <p class="content">{{account.logins[this.$route.params.id].profile.name}} <img :src="account.logins[this.$route.params.id].profile.image" width="20px" style="border-radius:100%"></p>
         <p class="header">Public Key</p>
         <p class="content">{{account.logins[this.$route.params.id].publicKey}}</p>
       </v-container>

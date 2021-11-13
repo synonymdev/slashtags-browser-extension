@@ -94,6 +94,7 @@ export default {
                 image: this.profile.image,
                 publicKey: this.keychain.getPublicKey()
               };
+              _.login.profile = metadata
               this.addLogin(_.login)
 
               return { metadata, keyPair: this.keychain.getKeypair()};
