@@ -1,25 +1,16 @@
 <template>
   <v-container fluid fill-height class="loginOverlay">
     <v-layout flex align-center justify-center>
-      <v-flex xs12 sm4 elevation-6>
-        <v-toolbar class="pt-5 orange darken-4">
+      <v-flex xs12 sm4 elevation-0>
+        <v-toolbar class="pt-5 transparent elevation-0">
           <v-toolbar-items>
               <v-toolbar-title class="white--text"><h4>Import Account</h4></v-toolbar-title>
           </v-toolbar-items>
         </v-toolbar>
-        <v-card>
+        <v-card class="transparent elevation-0">
           <v-card-text class="pt-4">
             <div>
                 <v-form v-model="valid" ref="form">
-                  <v-text-field
-                    label="Enter account name"
-                    v-model="username"
-                    min="8"
-                    :type="text"
-                    counter
-                    required
-                  ></v-text-field>
-
                   <v-text-field
                     label="Enter your password"
                     v-model="password"
@@ -61,7 +52,6 @@
 
                 </v-form>
                 <p v-if="error">{{error}}</p>
-                Address: {{address}}
             </div>
           </v-card-text>
         </v-card>
@@ -76,11 +66,16 @@
     name: 'Import',
     data () {
         return {
-          e1: false,
+          password: '',
+          password_confirm: '',
+          e1: true,
           mnemonic : null,
           address : null,
           valid: false,
-          error : false
+          error : false,
+          passwordRules: [
+            (v) => !!v || 'Password is required',
+          ]
         }
     },
     methods : {
@@ -93,21 +88,16 @@
       },
       submit () {
         if (this.$refs.form.validate()) {
-          try {
-            this.createAccount(this.mnemonic)
-          } catch(e) {
-            console.log("Exception", e)
-          }
+              var _ = this;
+              this.createAccount({ password: this.password, mnemonic: this.mnemonic }).then((data) => {
+                var payload = {}
+                payload.password = _.password
+                payload.data = data
+                this.$router.push({path: '/account/list'})
+              }).catch((e) => {
+                this.error = e
+              })    
         }
-        /*
-          try {
-            console.log(this.mnemonic)
-            var wallet = new Wallet(this.mnemonic)
-            this.address = wallet.getAddress()
-          } catch (e) {
-            this.error = e
-          }
-        }*/
       }
     }
   }

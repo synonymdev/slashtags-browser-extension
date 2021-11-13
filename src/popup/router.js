@@ -155,6 +155,8 @@ const routes = [
       path: '/settings', 
       component: Settings,
       meta: {
+        header: true,
+        back: true,
         requiresAuth: true
       } 
     },{ 
@@ -171,18 +173,23 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to.name,store.getters.accountCount)
+  console.log(to.name, from.name)
   if (to.matched.some(record => record.meta.requiresAuth)) {    
-    if (to.name != "link" && from.name != "step1" && !store.getters.accountCount) {
+    if (to.name != "link" && from.name != "step1" && to.name != "import" && !store.getters.accountCount) {
       next({
         path: '/onboarding/terms',
         query: { redirect: to.fullPath }
       })
     } else if (store.getters.isLocked) {
-      next({
-        path: '/login',
-        query: { redirect: to.fullPath }
-      })
+
+      if (to.name == "import" &&  from.name == "login") {
+        next()
+      } else {
+        next({
+          path: '/login',
+          query: { redirect: to.fullPath }
+        })
+      }
     } else {
       next()
     }

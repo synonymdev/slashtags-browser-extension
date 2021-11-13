@@ -28,9 +28,10 @@
                     @click:append="e1 = !e1"
                     required
                   ></v-text-field>
-                  <v-layout justify-space-between>
+                  <p> or <span @click="$router.push({path:'/account/import'})" style="text-decoration: underline; cursor:pointer">import an existing</span>.</p>
+                  <v-bottom-navigation app grow class="transparent">
                     <v-btn @click="submit" :class=" { 'orange darken-4 white--text' : valid, disabled: !valid }">Unlock</v-btn>
-                  </v-layout>
+                  </v-bottom-navigation>
                 </v-form>
             </div>
           </v-card-text>
@@ -80,3 +81,18 @@
         }
   }
 </script>
+
+<style scoped>
+.v-list-item__subtitle {
+  text-overflow: ellipsis;
+}
+.v-bottom-navigation {
+  margin-bottom:20px;
+}
+.v-bottom-navigation .v-btn {
+  background:rgba(255, 255, 255, 0.07) !important;
+  border-radius: 40px !important;
+  padding:10px;
+  margin:10px;
+}
+</style>
