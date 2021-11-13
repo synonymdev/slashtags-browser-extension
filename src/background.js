@@ -12,7 +12,8 @@ chrome.contextMenus.create({
       url: "popup.html#/account/link/" + btoa(info.selectionText),
       type: "popup",
       width: 375,
-      height: 600
+      height: 610,
+
     } , () => {
 
     })
@@ -26,7 +27,7 @@ chrome.runtime.onMessage.addListener(function(request, send, sendResponse) {
       url: "popup.html#/account/link/" + btoa(request.uri),
       type: "popup",
       width: 375,
-      height: 600
+      height: 640
     } , () => {
 
     })

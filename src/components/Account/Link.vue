@@ -37,12 +37,11 @@
           <img :src="item.image" width="20px" style="border-radius:100%"> <v-spacer></v-spacer> {{ item.name }}
         </template>
         </v-select>
-
-    <v-bottom-navigation app grow class="transparent">
-          <v-btn v-on:click="closeWindow" large rounded text>Cancel</v-btn>
-          <v-spacer></v-spacer>
-          <v-btn v-on:click="signIn" :disabled="error" style="color: rgba(75, 196, 0, 1) !important;" large rounded text>Accept</v-btn>
-    </v-bottom-navigation>
+        <v-bottom-navigation app grow class="transparent elevation-0" elevation-0>
+              <v-btn v-on:click="closeWindow" large rounded text>Cancel</v-btn>
+              <v-spacer></v-spacer>
+              <v-btn v-on:click="signIn" :disabled="error" style="color: rgba(75, 196, 0, 1) !important;" large rounded text>Accept</v-btn>
+        </v-bottom-navigation>
   </div>
 </template>
 
@@ -151,14 +150,11 @@ export default {
 .v-list-item__subtitle {
   text-overflow: ellipsis;
 }
-.v-bottom-navigation {
-  margin-bottom:20px;
-}
+
 .v-bottom-navigation .v-btn {
   background:rgba(255, 255, 255, 0.07) !important;
   border-radius: 40px !important;
-  padding:10px;
-  margin:10px;
+
 }
 
 p {
@@ -169,6 +165,7 @@ p {
 
 <style>
 body,html {
-  overflow:hidden;
+
 }
 </style>
+
