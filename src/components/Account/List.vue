@@ -30,7 +30,6 @@ import { mapActions } from 'vuex'
 export default {
   name: 'Accounts',
   mounted () {
-    console.log(this.$store.state.accounts[0].logins)
     browser.runtime.sendMessage({})
   },
   methods: {
@@ -40,11 +39,9 @@ export default {
         'decodeAccount'
     ]),
     addAccount: function() {
-      console.log("adding")
       this.$store.dispatch('addAccount')
     },
     deleteAccount: function() {
-      console.log("Deleting")
       this.$store.dispatch('removeAccount')
     }
   },

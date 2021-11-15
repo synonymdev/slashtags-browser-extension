@@ -173,7 +173,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to.name, from.name)
   if (to.matched.some(record => record.meta.requiresAuth)) {    
     if (to.name != "link" && from.name != "step1" && to.name != "import" && !store.getters.accountCount) {
       next({

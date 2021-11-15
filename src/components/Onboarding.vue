@@ -28,7 +28,6 @@ export default {
   },
   computed: {
     routes() {
-      console.log(this.$router.options.routes.find(r => r.name === 'onboarding').children)
       return this.$router.options.routes.find(r => r.name === 'onboarding').children;
     },
     routeIndex() {

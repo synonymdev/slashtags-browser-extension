@@ -1,5 +1,4 @@
 <template>
-
   <div>
     <div style="text-align:center" v-show="!login.image && !error">
      <v-progress-circular
@@ -73,16 +72,17 @@ export default {
     }
   },
   mounted () {
+    console.log("Connecting")
     this.keychain = new Keychain({mnemonic: this.$store.state.accounts[0].mnemonic})
     var url = atob(this.$route.params.tag)
     const node = Core(); 
     const slashActs = SlashtagsActions({ node })
     var _ = this;
+    console.log("url", url)
     slashActs.handle(url, {
           ACT_1: {
             // When you get server's publicKey, challenge, and metadata (name, image ...etc)
             onChallenge:  async (data) => {
-              console.log("Data",data)
               _.login = data.metadata
               _.login.publicKey = data.publicKey
 
@@ -99,14 +99,11 @@ export default {
               return { metadata, keyPair: this.keychain.getKeypair()};
             },
             onSuccess: ({responderPK, metadata}) => {
-              console.log("Success")
-              console.log("Here", {responderPK, metadata})
+              console.log(responderPK, metadata)
               this.closeWindow()
             },
             onError: (err) => {
               _.error = err
-              console.log("Error")
-              console.log('got error', err);
             },
           },
         }).then(console.log)
@@ -162,10 +159,3 @@ p {
   font-size: 17px;
 }
 </style>
-
-<style>
-body,html {
-
-}
-</style>
-

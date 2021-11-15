@@ -66,11 +66,9 @@
             if (this.$refs.form.validate()) {
               var resp = await this.decodeAccount({data:this.$store.state.encryptedAccounts[0],password:this.password})
               if (resp) {
-                console.log("success")
                 this.unlockWallet()
                 this.$router.push({path:"/account/list"})
               } else {
-                console.log("fail",resp)
                 this.error = resp
               }              
             }
