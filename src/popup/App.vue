@@ -114,4 +114,8 @@ body {
   color:#fff;
 }
 
+.v-btn__content {
+  font-size:15px;
+}
+
 </style>

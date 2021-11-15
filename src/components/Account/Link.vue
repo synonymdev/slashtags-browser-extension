@@ -156,6 +156,5 @@ export default {
 
 p {
   opacity: 0.4;
-  font-size: 17px;
 }
 </style>
