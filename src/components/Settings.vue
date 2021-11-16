@@ -28,7 +28,9 @@
     methods: {
       exportData() {
         var element = document.createElement('a');
-        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + JSON.stringify(this.$store.state));
+        var backupObj = Object.assign({}, this.$store.state);
+        backupObj.accounts[0].mnemonic = null
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + JSON.stringify(backupObj));
         element.setAttribute('download', "backup.txt");
 
         element.style.display = 'none';
