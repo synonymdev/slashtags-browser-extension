@@ -72,30 +72,35 @@ export default {
     }
   },
   mounted () {
-    console.log("Connecting")
     this.keychain = new Keychain({mnemonic: this.$store.state.accounts[0].mnemonic})
-    var url = atob(this.$route.params.tag)
+    const url = atob(this.$route.params.tag)
     const node = Core(); 
     const slashActs = SlashtagsActions({ node })
-    var _ = this;
-    console.log("url", url)
+    const _ = this;
+
     slashActs.handle(url, {
           ACT_1: {
             // When you get server's publicKey, challenge, and metadata (name, image ...etc)
             onChallenge:  async (data) => {
               _.login = data.metadata
               _.login.publicKey = data.publicKey
+              
+              const existingLogin = this.$store.state.accounts[0].logins.filter((login) => {if (login.publicKey == _.login.publicKey) return 1})
 
-              await _.isLoggedIn()
+              if (!existingLogin.length) { // new login
 
-              var metadata = {
-                name: this.profile.name,
-                image: this.profile.image,
-                publicKey: this.keychain.getPublicKey()
-              };
-              _.login.profile = metadata
-              this.addLogin(_.login)
+                await _.isLoggedIn()
+                var metadata = {
+                  name: this.profile.name,
+                  image: this.profile.image,
+                  publicKey: this.keychain.getPublicKey()
+                };
 
+                _.login.profile = metadata
+                this.addLogin(_.login)
+              } else { // existing login
+                var metadata = existingLogin[0].profile;
+              }
               return { metadata, keyPair: this.keychain.getKeypair()};
             },
             onSuccess: ({responderPK, metadata}) => {
