@@ -82,6 +82,7 @@ export default {
           ACT_1: {
             // When you get server's publicKey, challenge, and metadata (name, image ...etc)
             onChallenge:  async (data) => {
+							var metadata = {}
               _.login = data.metadata
               _.login.publicKey = data.publicKey
               
@@ -90,7 +91,7 @@ export default {
               if (!existingLogin.length) { // new login
 
                 await _.isLoggedIn()
-                var metadata = {
+                metadata = {
                   name: this.profile.name,
                   image: this.profile.image,
                   publicKey: this.keychain.getPublicKey()
@@ -99,7 +100,7 @@ export default {
                 _.login.profile = metadata
                 this.addLogin(_.login)
               } else { // existing login
-                var metadata = existingLogin[0].profile;
+                metadata = existingLogin[0].profile;
               }
               return { metadata, keyPair: this.keychain.getKeypair()};
             },
