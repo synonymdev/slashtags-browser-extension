@@ -1,4 +1,5 @@
 # slashtags-extension
+A demo wallet for creating, managing, testing, and restoring Slashtags keys in Chrome.
 
 ## Project setup
 ```
